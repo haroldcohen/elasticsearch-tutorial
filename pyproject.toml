@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "elasticsearch-tutorial"
+version = "0.0.1"
+description = "An tutorial for elasticsearch"
+authors = ["Harold Cohen"]
+
+[tool.poetry.dependencies]
+python = "^3.7.4"
+dateparser = "^1.1.1"
+elasticsearch = "7.13.4"
+dependency-injector = "^4.39.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "7.1.2"
+treelib = "^1.6.1"
+pytest-watch = "^4.2.0"
+moto = "^2.3.0"
+python-semantic-release = "^7.23.0"
+pyhamcrest = "^2.0.3"
+freezegun = "^1.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

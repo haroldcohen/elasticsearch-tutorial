@@ -1,0 +1,12 @@
+*.egg-info/
+__pycache__/
+.coverage
+venv/
+/docs
+.pytest_cache
+*.log
+.DS_Store
+.vscode
+.idea
+.venv
+*.pyc
