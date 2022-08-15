@@ -12,10 +12,11 @@ interfaces.
 Unlike relational databases like PostgreSQL or MySQL, Elasticsearch does not store data in forms of columns located in
 multiple tables.
 
-> ES is a NoSQL distributed document store that uses JSON as exchange format.
+> <span style="color:#0277CD"><b>ES is a NoSQL distributed document store that uses JSON as exchange format.</b></span>
 
 Since Elasticsearch is a distributed system, it can handle incredibly large volumes of data without facing performance
 issues. :boom:
+
 Below are some key differences.
 
 |                        | PostgreSQL | Elasticsearch |
@@ -30,15 +31,38 @@ Below are some key differences.
 
 ### What are indices and documents ?
 
-> An index is a collection of documents, and each document is a collection of fields.
-ES has the ability to be schema-less, meaning you don't need to how to handle the field of a document.
+> <span style="color:#0277CD"><b>An index is a collection of documents, and each document is a collection of fields.
+> ES has the ability to be schema-less, meaning you don't need to how to handle the field of a document.</b></span>
 
 In short, Elasticsearch stores JSON documents in indices, whereas PostgreSQL stores data in rows and columns across
 tables in databases.
 
-### Nodes and shards
+### Nodes
 
 As mentioned above, Elasticsearch is a distributed system.
+Meaning Elasticsearch can be a cluster of nodes, allowing you to deploy additional nodes that will be 
+capable of indexing and searching documents.
+
+> <span style="color:#0277CD"><b>A node is a server that is part of a cluster.</b></span>
+
+Elasticsearch automatically distributes the load across the available nodes.
+
+There are two types of nodes.
+
+- Master nodes, responsible for managing a cluster's activity.
+- Data nodes, responsible for data indexing and search.
+
+### Shards
+
+As we mentioned above, Elasticsearch stores data in indices. 
+Those indices are fragmented into smaller units called shards.
+
+> <span style="color:#0277CD"><b>A shard is an instance of a Lucene index that can 
+> index and handle queries for a subset of data in a cluster.</b></span>
+
+> <span style="color:#8AC10E"><b>TIP: Avoid very large shards to avoid failure recover issues. A shard of 50GB is often 
+> a limit that has proven to work for most use-cases. You can learn more 
+> [here](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster)
 
 ### Elasticsearch features and REST API
 
@@ -169,7 +193,7 @@ es_client.index(
 )
 ```
 
-> If retrieve the indexed document right after indexing, you will notice that Elasticsearch returns an empty result.
+Retrieving the document right after indexing will result in an empty result.
 
 ```python
 # noinspection PyUnresolvedReferences
@@ -202,7 +226,8 @@ es_client.search(
 }
 ```
 
-> The reason for this is that although indexing is near real time, indices are refreshed by default every 1 second.
+> <span style="color:#0277CD"><b>The reason for this is that although indexing is near real time, indices are refreshed
+> by default every 1 second.</b></span>
 
 You can force a refresh to update the index at the time of the request:
 
@@ -221,9 +246,10 @@ es_client.index(
 )
 ```
 
-You will also notice that Elasticsearch has automatically created an ID for the said document. Although convenient, it might
+You will also notice that Elasticsearch has automatically created an ID for the said document. Although convenient, it
+might
 be an issue when we want to update the document.
-That's why providing an ID when indexing a new document is sometimes preferable, 
+That's why providing an ID when indexing a new document is sometimes preferable,
 especially if you are indexing entities from your system.
 
 ```python
@@ -240,8 +266,6 @@ es_client.index(
     }
 )
 ```
-
-You can exercise on adding documents [here](tests/test_index.py)
 
 ### Updating a document
 
@@ -311,4 +335,40 @@ The answer should look something like that:
 }
 ```
 
+You can exercise with indexing documents [here](tests/test_index.py)
+
 ## Searching for documents
+
+### Using a Match query
+
+There are many ways to retrieve documents in Elasticsearch. One of them is to use a Match query.
+The Match query will look for documents with fields matching the query:
+
+```
+GET /vehicles/_search
+
+{
+  "query": {
+    "match": {
+      "license_plate": {
+        "query": "STARLORD"
+      }
+    }
+  }
+}
+```
+
+> Note that specifying an index is not mandatory.
+
+The query could be sent this way as well:
+```
+GET /vehicles/_search
+
+{
+  "query": {
+    "match": {
+      "license_plate": "STARLORD"
+    }
+  }
+}
+```

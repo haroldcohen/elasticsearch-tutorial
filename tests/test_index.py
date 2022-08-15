@@ -1,4 +1,4 @@
-"""Here you can learn and exercise on how to add a document"""
+"""Here you can learn and exercise on how to add, update and delete document"""
 import elasticsearch as es
 import pytest
 
@@ -40,7 +40,6 @@ def test_index_a_mustang_should_return_a_created_response(es_client: es.Elastics
 def test_update_a_mustang_should_return_an_updated_response(es_client: es.Elasticsearch, populate_es):
     """Running this test will update the color of the mustang license plated IRONMAN.
     Feel free to play with it and change it as you please"""
-    # TODO: Remove time sleep (Index does not seem to be available straight after indexing).
     result = es_client.update(
         index="vehicles",
         id="e9f9a60e-7f2c-4182-813f-580b30dfc85b",
