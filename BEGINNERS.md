@@ -15,7 +15,7 @@ multiple tables.
 > ES is a NoSQL distributed document store that uses JSON as exchange format.
 
 Since Elasticsearch is a distributed system, it can handle incredibly large volumes of data without facing performance
-issues.
+issues. :boom:
 Below are some key differences.
 
 |                        | PostgreSQL | Elasticsearch |
@@ -36,17 +36,19 @@ ES has the ability to be schema-less, meaning you don't need to how to handle th
 In short, Elasticsearch stores JSON documents in indices, whereas PostgreSQL stores data in rows and columns across
 tables in databases.
 
+### Nodes and shards
+
+As mentioned above, Elasticsearch is a distributed system.
+
 ### Elasticsearch features and REST API
 
 Elasticsearch provides with a REST API that can be called directly to access ES features.
 You will find a complete API
 documentation [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html)
 
-## Using Elasticsearch
+## Creating, updating and deleting documents
 
-### Working with documents
-
-#### Index a new document
+### Indexing a new document
 
 Let's imagine a car rental system where I want to store a car in an index named "vehicles".\
 To do so, I can send the following request to Elasticsearch (available on port 9200 of your localhost).
@@ -130,9 +132,9 @@ The answer should look something like that:
 }
 ```
 
-Of course, sending request like we just would be extremely tedious in a real life project.\
+Of course, sending request like we just did would be extremely tedious in a real life project.\
 Thankfully there are libraries available that will make it easier for a developer.\
-For Python, we can use the library elasticsearch available on PyPi (installed by Poetry at the beginning of the
+In Python, we use the library elasticsearch available on PyPi (installed by Poetry at the beginning of the
 tutorial).
 
 We first need an instance of an Elasticsearch client:
@@ -221,7 +223,8 @@ es_client.index(
 
 You will also notice that Elasticsearch has automatically created an ID for the said document. Although convenient, it might
 be an issue when we want to update the document.
-That's why providing an ID when indexing a new document is preferable.
+That's why providing an ID when indexing a new document is sometimes preferable, 
+especially if you are indexing entities from your system.
 
 ```python
 # noinspection PyUnresolvedReferences
@@ -240,7 +243,7 @@ es_client.index(
 
 You can exercise on adding documents [here](tests/test_index.py)
 
-#### Updating a document
+### Updating a document
 
 As mentioned above, updating a document will require an ID
 
@@ -282,7 +285,7 @@ es_client.update(
 )
 ```
 
-#### Deleting a document
+### Deleting a document
 
 To delete a document using the Elasticsearch API, I can send the following request.
 
@@ -308,4 +311,4 @@ The answer should look something like that:
 }
 ```
 
-### Searching documents
+## Searching for documents
