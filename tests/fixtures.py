@@ -14,12 +14,10 @@ def es_client() -> es.Elasticsearch:
                 "port": 9200,
             }
         ],
-        connection_class=es.RequestsHttpConnection,
         timeout=60,
         max_retries=10,
         retry_on_timeout=True,
-        ca_certs=False,
-        verify_certs=False
+        verify_certs=False,
     )
     yield client
     for index in client.indices.get("*"):

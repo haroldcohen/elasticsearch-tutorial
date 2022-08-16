@@ -62,7 +62,7 @@ Those indices are fragmented into smaller units called shards.
 
 > <span style="color:#8AC10E"><b>TIP: Avoid very large shards to avoid failure recover issues. A shard of 50GB is often 
 > a limit that has proven to work for most use-cases. You can learn more 
-> [here](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster)
+> [here](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster)</b></span>
 
 ### Elasticsearch features and REST API
 
