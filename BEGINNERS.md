@@ -40,7 +40,7 @@ tables in databases.
 ### Nodes
 
 As mentioned above, Elasticsearch is a distributed system.
-Meaning Elasticsearch can be a cluster of nodes, allowing you to deploy additional nodes that will be 
+Meaning Elasticsearch can be a cluster of nodes, allowing you to deploy additional nodes that will be
 capable of indexing and searching documents.
 
 > <span style="color:#0277CD"><b>A node is a server that is part of a cluster.</b></span>
@@ -54,14 +54,14 @@ There are two types of nodes.
 
 ### Shards
 
-As we mentioned above, Elasticsearch stores data in indices. 
+As we mentioned above, Elasticsearch stores data in indices.
 Those indices are fragmented into smaller units called shards.
 
-> <span style="color:#0277CD"><b>A shard is an instance of a Lucene index that can 
+> <span style="color:#0277CD"><b>A shard is an instance of a Lucene index that can
 > index and handle queries for a subset of data in a cluster.</b></span>
 
-> <span style="color:#8AC10E"><b>TIP: Avoid very large shards to avoid failure recover issues. A shard of 50GB is often 
-> a limit that has proven to work for most use-cases. You can learn more 
+> <span style="color:#8AC10E"><b>TIP: Avoid very large shards to avoid failure recover issues. A shard of 50GB is often
+> a limit that has proven to work for most use-cases. You can learn more
 > [here](https://www.elastic.co/blog/how-many-shards-should-i-have-in-my-elasticsearch-cluster)</b></span>
 
 ### Elasticsearch features and REST API
@@ -335,6 +335,16 @@ The answer should look something like that:
 }
 ```
 
+Using Python Elasticsearch delete() method will look like this:
+
+```python
+# noinspection PyUnresolvedReferences
+es_client.delete(
+    index="vehicles",
+    id="6c5a3e96-b9f4-4a08-ad5d-ad1fa0791d1b",
+)
+```
+
 You can exercise with indexing documents [here](tests/test_index.py)
 
 ## Searching for documents
@@ -361,6 +371,7 @@ GET /vehicles/_search
 > Note that specifying an index is not mandatory.
 
 The query could be sent this way as well:
+
 ```
 GET /vehicles/_search
 
