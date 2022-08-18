@@ -17,6 +17,10 @@ You can find the official documentations for both projects here:
 - Poetry
 - Elasticsearch (8.x)
 
+> :warning: <b>This tutorial is currently based on the latest version of Elasticsearch (8.x).
+> Due to bugs in the Python client matching version, the version in the dependency file is set to 7.x
+> An upgrade will be committed once the issue is resolved.</b>
+
 ### Getting started
 
 At the project's root, run:

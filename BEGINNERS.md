@@ -383,3 +383,5 @@ GET /vehicles/_search
   }
 }
 ```
+
+You can exercise with searching documents [here](tests/test_search.py)
